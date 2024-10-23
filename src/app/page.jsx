@@ -7,26 +7,16 @@ import axios from "axios";
 
 export default function Home() {
   const router = useRouter();
-  const [formData, setFormData] = useState({ nome: "", KWh: "0" });
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const [formData, setFormData] = useState({ nome: "", KWh: "" });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    setErrorMessage(""); // Limpa a mensagem de erro ao digitar
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!formData.nome) {
-      setErrorMessage("Por favor, escreva seu nome.");
-      setTimeout(() => {
-        setErrorMessage(""); // Limpa a mensagem após 2 segundos
-      }, 1000);
-      return; // Para a execução se o nome estiver vazio
-    }
-
+    event.preventDefault(); // Previne o comportamento padrão de recarregar a página
     console.log("Dados do formulário:", formData);
 
     try {
@@ -65,7 +55,7 @@ export default function Home() {
           className="flex gap-4 flex-col text-blue-950"
         >
           <div className="flex flex-col">
-            <label htmlFor="name" className="mr-4">
+            <label htmlFor="name" className="mr-4 ">
               Seu Nome:
             </label>
             <input
@@ -76,17 +66,27 @@ export default function Home() {
               placeholder="digite seu nome"
               className="px-2 py-1 rounded-lg bg-blue-200 hover:bg-blue-300 border-spacing-1"
             />
-            {errorMessage && (
-              <p className="text-red-500 mt-2">{errorMessage}</p>
-            )}
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="KWh" className="mr-4">
+              Seu Consumo de kWh:
+            </label>
+            <input
+              type="number"
+              id="KWh"
+              name="KWh"
+              onChange={handleChange}
+              placeholder="consumo de kWh > 0"
+              className="px-2 py-1 rounded-lg bg-blue-200 hover:bg-blue-300"
+            />
           </div>
 
           <div className="w-full flex items-center justify-center">
             <button
               type="submit"
-              className="px-3 py-1 rounded-2xl bg-blue-300 text-blue-950 shadow-lg hover:bg-blue-500"
+              className="px-3 py-1 rounded-2xl bg-blue-300 text-blue-950 shadow-lg hover:bg-blue-500 "
             >
-              Ver Fornecedores
+              Cadastrar
             </button>
           </div>
         </form>
