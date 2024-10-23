@@ -19,10 +19,8 @@ export default function FornecedoresPage({ searchParams }) {
       if (kWh && !isNaN(kWh) && Number(kWh) > 0) {
         try {
           // Usando a variável de ambiente para a URL da API
-          const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-          const response = await axios.get(
-            `${apiUrl}/api/get-fornecedores?kWh=${kWh}`
-          );
+         
+          const response = await axios.get(`api/get-fornecedores?kWh=${kWh}`);
 
           if (response.data && response.data.fornecedores) {
             setFornecedores(response.data.fornecedores);

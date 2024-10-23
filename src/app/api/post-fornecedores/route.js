@@ -2,13 +2,14 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/database/dbConnect";
 import { fornecedorModel } from "@/models/fornecedor.Model";
 
+// Método POST
 export async function POST(request) {
   await dbConnect();
   try {
-    const dadosFornecedores = await request.json();
-    const novoFornecedor = await fornecedorModel.create(dadosFornecedores);
+    const dadosFornecedores = await request.json(); // Coletar dados do fornecedor
+    const novoFornecedor = await fornecedorModel.create(dadosFornecedores); // Criar novo fornecedor
     return NextResponse.json(
-      { message: "fornecedor criado com sucesso", fornecedor: novoFornecedor },
+      { message: "Fornecedor criado com sucesso", fornecedor: novoFornecedor },
       { status: 200 }
     );
   } catch (error) {

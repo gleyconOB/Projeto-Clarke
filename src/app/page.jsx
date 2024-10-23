@@ -19,9 +19,11 @@ export default function Home() {
     console.log("Dados do formulário:", formData);
 
     try {
-      // Usando a variável de ambiente para a URL da API
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-      const response = await axios.post(`${apiUrl}/api/post-usuarios`, formData);
+     
+      
+      
+      const response = await axios.post("/api/post-usuarios", formData);
+      console.log("url funcionando:");
 
       router.push(`/fornecedores?kWh=${formData.KWh}`);
       console.log(response.data);
