@@ -7,7 +7,6 @@ import axios from "axios";
 
 export default function Home() {
   const router = useRouter();
-
   const [formData, setFormData] = useState({ nome: "", KWh: "" });
 
   const handleChange = (event) => {
@@ -20,15 +19,14 @@ export default function Home() {
     console.log("Dados do formulário:", formData);
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/post-usuarios",
-        formData
-      );
+      // Usando a variável de ambiente para a URL da API
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await axios.post(`${apiUrl}/api/post-usuarios`, formData);
 
       router.push(`/fornecedores?kWh=${formData.KWh}`);
       console.log(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("Erro ao enviar os dados:", error);
     }
   };
 
